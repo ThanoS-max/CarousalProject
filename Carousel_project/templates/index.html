@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+  </head>
+  <body>
+    <div class="fluid-container">
+        <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel" >
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner" data-bs-toggle="modal" data-bs-target="#dataModal">
+              <div class="carousel-item active">
+                <img src="../static/images/1.jpg" class="d-block w-100" alt="image1">
+              </div>
+              <div class="carousel-item">
+                <img src="../static/images/2.jpg" class="d-block w-100" alt="image2">
+              </div>
+              <div class="carousel-item">
+                <img src="../static/images/3.jpg" class="d-block w-100" alt="image3">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+    </div>
+    <div class="container py-5">
+        <table class="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th scope="col-5">Email</th>
+                <th scope="col-3">Phone</th>
+                <th scope="col-4">Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in rows %}
+              <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+    <div class="modal fade" id="dataModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="dataLabel" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Enter Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/add_entry", method="post">
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email address:</label>
+                      <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="mb-3">
+                      <label for="phone" class="form-label">Phone No:</label>
+                      <input type="tel" pattern="[0-9]{10}" class="form-control" id="phone" aria-describedby="passHelp" name="phone">
+                      <div id="passHelp" class="form-text">Just the 10 digit No, do not include +91 or 0 at the start</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name:</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success">Update Table</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
